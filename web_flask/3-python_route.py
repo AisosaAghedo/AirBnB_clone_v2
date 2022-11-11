@@ -22,7 +22,7 @@ def display_c(text):
     return "C {}".format(text.replace('_', ' '))
 
 
-@app.route('/python/', defaults={text: 'is cool'}
+@app.route('/python/', defaults={'text': 'is cool'})
 @app.route('/python/<text>', strict_slashes=False)
 def python_is_cool(text):
     """ return python is cool as default"""
