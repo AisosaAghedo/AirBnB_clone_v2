@@ -11,7 +11,7 @@ from models.state import State
 from models.user import User
 from models.amenity import Amenity
 classes = {"City": City, "State": State, "User": User,
-        "Place": Place, "Review": Review, 'Amenity': Amenity} 
+           "Place": Place, "Review": Review, 'Amenity': Amenity}
 
 
 class DBStorage:
@@ -24,8 +24,9 @@ class DBStorage:
         user = getenv("HBNB_MYSQL_USER")
         pwd = getenv("HBNB_MYSQL_PWD")
         dbase = getenv("HBNB_MYSQL_DB")
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
-                                      user, pwd, dbase), pool_pre_ping=True)
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
+                                      .format(user, pwd, dbase),
+                                      pool_pre_ping=True)
 
         if getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
