@@ -42,10 +42,10 @@ class DBStorage:
                     key1 = key + "." + obj.id
                     new_dict[key1] = obj.to_dict()
         else:
-            if cls in classes:
+            if cls.__name__ in classes:
                 sesh = self.__session.query(cls).all()
                 for obj in sesh:
-                    key1 = key + "." + obj.id
+                    key1 = cls.__name__ + "." + obj.id
                     new_dict[key1] = obj.to_dict()
         return new_dict
 
@@ -68,3 +68,7 @@ class DBStorage:
         sesh = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sesh)
         self.__session = Session()
+
+    def close(self):
+        """ updating DB storage """
+        self.__session.close()
