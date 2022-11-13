@@ -11,14 +11,14 @@ app = Flask(__name__)
 def states():
     """Displays an HTML page with a list of all States.
     """
-    states = storage.all(State)
+    states = storage.all("State")
     return render_template("9-states.html", state=states)
 
 
 @app.route("/states/<id>", strict_slashes=False)
 def id_states(id):
     """HTML page with info about <id>, if it exists."""
-    for state in storage.all(State).values():
+    for state in storage.all("State").values():
         if state.id == id:
             return render_template("9-states.html", state=state)
     return render_template("9-states.html")
@@ -31,4 +31,4 @@ def teardown(exc):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", port=5000)
